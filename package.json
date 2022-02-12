@@ -27,6 +27,7 @@
     }
   },
   "dependencies": {
+    "classcat": "^5.0.3",
     "next": "12.0.10",
     "react": "17.0.2",
     "react-dom": "17.0.2",
@@ -40,6 +41,7 @@
     "@storybook/addon-info": "^5.3.21",
     "@storybook/addon-knobs": "^6.4.0",
     "@storybook/addon-links": "^6.4.18",
+    "@storybook/addon-postcss": "^2.0.0",
     "@storybook/react": "^6.4.18",
     "@tailwindcss/forms": "0.4.0",
     "@tailwindcss/line-clamp": "0.3.1",
