@@ -31,10 +31,6 @@ module.exports = {
       "as-needed",
       { requireReturnForObjectLiteral: true },
     ],
-    "no-restricted-imports": [
-      "error",
-      { paths: [{ name: "react", importNames: ["default"] }] },
-    ],
     // react
     "react/display-name": "error",
     "react/jsx-handler-names": [
