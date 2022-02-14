@@ -1,23 +1,17 @@
 import type { VFC } from "react";
-import { NavLink } from "src/component/Button";
-
-const items = [
-  { href: "/", label: "Root" },
-  { href: "/about", label: "About" },
-];
 
 /**
  * @package
  */
+
 export const Header: VFC = () => (
   <div>
-    <h1>Title</h1>
-    <nav>
-      {items.map(({ href, label }) => (
-        <NavLink key={href} href={href} activeClassName="text-red-500">
-          <a className="inline-block p-4">{label}</a>
-        </NavLink>
-      ))}
+    <nav className="p-4 bg-white ">
+      <div className="flex flex-row justify-between">
+        <div></div>
+        <div className="text-xl text-center">Qin Todo</div>
+        <div className="mr-0 w-8 h-8 bg-blue-300 rounded-full"></div>
+      </div>
     </nav>
   </div>
 );
