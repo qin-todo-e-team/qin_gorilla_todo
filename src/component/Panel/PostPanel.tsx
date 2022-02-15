@@ -19,14 +19,17 @@ export const PostPanel = (props: PostPanelPropsType) => {
   const { onChange, onSubmit, value } = props;
   const [textboxValue, setTextboxValue] = useState(value);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTextboxValue(e.target.value);
+    setTextboxValue(e.target.value || "");
     onChange && onChange(textboxValue);
   };
-  const handleSubmit = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSubmit = (
+    e: React.MouseEvent<HTMLButtonElement>,
+    typeString: string
+  ) => {
     e.preventDefault();
     onSubmit &&
       onSubmit({
-        type: e.target.getAttribute("data-type") || undefined,
+        type: typeString || "",
         value: textboxValue || "",
       });
     setTextboxValue("");
@@ -37,9 +40,9 @@ export const PostPanel = (props: PostPanelPropsType) => {
         <div className="group flex justify-center mb-2 space-x-2 w-full">
           <PostTextbox
             value={textboxValue || ""}
-            onChange={() => {
-              handleChange;
-            }}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+              handleChange(event)
+            }
           />
         </div>
         <div
@@ -50,20 +53,20 @@ export const PostPanel = (props: PostPanelPropsType) => {
         >
           <PostButton
             type="today"
-            onClick={() => {
-              handleSubmit;
+            onClick={(event: React.MouseEvent<HTMLButtonElement>) => {
+              handleSubmit(event, "today");
             }}
           />
           <PostButton
             type="tommorow"
-            onClick={() => {
-              handleSubmit;
+            onClick={(event: React.MouseEvent<HTMLButtonElement>) => {
+              handleSubmit(event, "tommorow");
             }}
           />
           <PostButton
             type="upcoming"
-            onClick={() => {
-              handleSubmit;
+            onClick={(event: React.MouseEvent<HTMLButtonElement>) => {
+              handleSubmit(event, "upcoming");
             }}
           />
         </div>

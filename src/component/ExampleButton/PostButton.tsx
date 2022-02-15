@@ -3,7 +3,7 @@ import React from "react";
 
 type PostButtonPropsType = {
   type?: "today" | "upcoming" | "tommorow" | undefined;
-  onClick?: () => void | undefined;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void | undefined;
 };
 
 type PostOption = {
@@ -36,7 +36,9 @@ export const PostButton = (props: PostButtonPropsType) => {
           "bg-[#fbbf24]": color === "yellow",
         },
       ])}
-      onClick={onClick}
+      onClick={(event: React.MouseEvent<HTMLButtonElement>) => {
+        onClick && onClick(event);
+      }}
       data-type={type}
     >
       {title}

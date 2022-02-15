@@ -3,7 +3,7 @@ import React from "react";
 
 type PostTextboxPropsType = {
   value: string;
-  onChange?: () => void | undefined;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void | undefined;
 };
 
 export const PostTextbox = (props: PostTextboxPropsType) => {
@@ -17,9 +17,7 @@ export const PostTextbox = (props: PostTextboxPropsType) => {
         "focus:ring-0 focus:caret-rose-500 focus:border focus:border-rose-500 focus:shadow focus:shadow-rose-300/50",
         {},
       ])}
-      onChange={() => {
-        onChange;
-      }}
+      onChange={onChange}
       placeholder="タスクを入力する"
       value={value}
     />
