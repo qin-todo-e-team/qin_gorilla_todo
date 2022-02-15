@@ -1,4 +1,5 @@
 import type { VFC } from "react";
+import { PostPanel } from "src/component/Panel/PostPanel";
 import { TodoList } from "src/component/TodoList";
 
 const todayList: string[] = ["Qin Todo", "A simple todo app", "by Qin", "hoge"];
@@ -12,5 +13,6 @@ export const Index: VFC = () => (
       tomorrowList={tomorrowList}
       nextList={nextList}
     />
+    <PostPanel />
   </>
 );
