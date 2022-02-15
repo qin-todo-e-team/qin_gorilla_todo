@@ -37,6 +37,7 @@ export const PostButton = (props: PostButtonPropsType) => {
         },
       ])}
       onClick={onClick}
+      data-type={type}
     >
       {title}
     </button>
