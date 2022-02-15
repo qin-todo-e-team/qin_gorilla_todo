@@ -3,6 +3,7 @@ import React from "react";
 
 type PostButtonPropsType = {
   type?: "today" | "upcoming" | "tommorow" | undefined;
+  size?: "big" | "midium" | "small" | undefined;
   onClick?: () => void | undefined;
 };
 
@@ -24,7 +25,7 @@ const PostItem: PostItemType = {
 };
 
 export const PostButton = (props: PostButtonPropsType) => {
-  const { onClick, type } = props;
+  const { onClick, size, type } = props;
   const { color, title } = PostItem[type || "today"];
   return (
     <button
@@ -33,7 +34,12 @@ export const PostButton = (props: PostButtonPropsType) => {
         {
           "bg-[#f43f5e]": color === "red",
           "bg-[#fb923c]": color === "orange",
-          "bg-[#fbbf24]": color === "yellow",
+          "bg-[#fbbf24] text-white": color === "yellow",
+        },
+        {
+          "w-[200px]": size === "big",
+          "w-[150px]": size === "midium",
+          "w-[100px]": size === "small",
         },
       ])}
       onClick={onClick}

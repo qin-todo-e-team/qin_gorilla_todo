@@ -11,6 +11,7 @@ export default {
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {
     type: { control: "select", options: ["today", "tommorow", "upcoming"] },
+    size: { control: "select", options: ["big", "midium", "small"] },
   },
 } as ComponentMeta<typeof PostButton>;
 
@@ -21,6 +22,7 @@ const Template: ComponentStory<typeof PostButton> = (args) => (
 
 export const PostTodayTodo = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
+//最初のパターン設定
 PostTodayTodo.args = {
   type: "today",
   onClick: () => {
