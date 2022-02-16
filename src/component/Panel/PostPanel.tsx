@@ -1,8 +1,8 @@
 import cc from "classcat";
 import React, { useState } from "react";
 
-import { PostTextBox } from "../ExampleButton/PostBox";
 import { PostButton } from "../ExampleButton/PostButton";
+import { PostTextBox } from "../ExampleButton/PostTextBox";
 
 type PostPanelSubmitType = {
   type: string;
@@ -20,7 +20,7 @@ export const PostPanel: React.VFC<PostPanelPropsType> = ({
   onSubmit,
   value,
 }: PostPanelPropsType) => {
-  const [textboxValue, setTextboxValue] = useState<string>(value);
+  const [textboxValue, setTextboxValue] = useState<string>(value ?? "");
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTextboxValue(e.target.value || "");
     onChange && onChange(textboxValue);
@@ -38,7 +38,7 @@ export const PostPanel: React.VFC<PostPanelPropsType> = ({
   };
   return (
     <div className="fixed bottom-0 left-0 py-2 mx-auto w-full h-auto bg-white">
-      <div className="group container w-full">
+      <div className="group w-full">
         <div className="group flex justify-center mb-2 space-x-2 w-full">
           <PostTextBox
             value={textboxValue ?? ""}
