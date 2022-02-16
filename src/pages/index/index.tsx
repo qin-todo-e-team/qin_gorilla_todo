@@ -1,5 +1,5 @@
 import type { VFC } from "react";
-import { TodoList } from "src/component/TodoList";
+import { TodoList } from "src/component/TodoList/TodoList";
 
 const todayList: string[] = ["Qin Todo", "A simple todo app", "by Qin", "hoge"];
 const tomorrowList: string[] = ["Qin Todo", "A simple todo app", "by Qin"];

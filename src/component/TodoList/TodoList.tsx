@@ -1,4 +1,4 @@
-import { CheckBox } from "src/component/CheckBox";
+import { CheckBox } from "src/component/CheckBox/CheckBox";
 
 type Props = {
   todayList: string[];
