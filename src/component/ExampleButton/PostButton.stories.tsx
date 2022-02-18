@@ -10,7 +10,7 @@ export default {
   component: PostButton,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {
-    type: { control: "select", options: ["today", "tommorow", "upcoming"] },
+    type: { control: "select", options: ["today", "tomorrow", "upcoming"] },
   },
 } as ComponentMeta<typeof PostButton>;
 
@@ -28,9 +28,9 @@ PostTodayTodo.args = {
   },
 };
 
-export const PostTommorowTodo = Template.bind({});
-PostTommorowTodo.args = {
-  type: "tommorow",
+export const PostTomorrowTodo = Template.bind({});
+PostTomorrowTodo.args = {
+  type: "tomorrow",
   onClick: () => {
     alert("明日するTODOを追加しました");
   },

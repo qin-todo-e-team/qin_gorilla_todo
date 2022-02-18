@@ -2,8 +2,8 @@ import cc from "classcat";
 import React from "react";
 
 type PostButtonPropsType = {
-  type?: "today" | "upcoming" | "tommorow" | undefined;
-  onClick?: () => void | undefined;
+  type?: "today" | "upcoming" | "tomorrow" | undefined;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void | undefined;
 };
 
 type PostOption = {
@@ -13,18 +13,20 @@ type PostOption = {
 
 type PostItemType = {
   today: PostOption;
-  tommorow: PostOption;
+  tomorrow: PostOption;
   upcoming: PostOption;
 };
 
 const PostItem: PostItemType = {
   today: { title: "＋ 今日する", color: "red" },
-  tommorow: { title: "＋ 明日する", color: "orange" },
+  tomorrow: { title: "＋ 明日する", color: "orange" },
   upcoming: { title: "＋ 今度する", color: "yellow" },
 };
 
-export const PostButton = (props: PostButtonPropsType) => {
-  const { onClick, type } = props;
+export const PostButton: React.VFC<PostButtonPropsType> = ({
+  onClick,
+  type,
+}) => {
   const { color, title } = PostItem[type || "today"];
   return (
     <button
@@ -36,7 +38,10 @@ export const PostButton = (props: PostButtonPropsType) => {
           "bg-[#fbbf24]": color === "yellow",
         },
       ])}
-      onClick={onClick}
+      onClick={(event: React.MouseEvent<HTMLButtonElement>) => {
+        onClick && onClick(event);
+      }}
+      data-type={type}
     >
       {title}
     </button>

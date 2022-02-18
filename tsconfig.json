@@ -14,6 +14,11 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "baseUrl": ".",
+    "paths": {
+      "@component/*": ["./src/component/*"],
+      "@lib/*": ["./src/lib/*"],
+      "@hooks/*": ["./src/hooks/*"]
+    },
     "incremental": true
   },
   "exclude": ["node_modules", ".next", "out"],
