@@ -30,11 +30,11 @@
   "dependencies": {
     "classcat": "^5.0.3",
     "firebase": "^9.6.6",
-    "firebase-react-hooks": "^0.8.0",
     "next": "12.0.10",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "react-error-boundary": "3.1.4"
+    "react-error-boundary": "3.1.4",
+    "react-firebase-hooks": "^5.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.17.2",
