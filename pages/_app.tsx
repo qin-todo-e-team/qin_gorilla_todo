@@ -1,5 +1,6 @@
 import "../src/style/index.css";
 
+import { ChakraProvider } from "@chakra-ui/react";
 import type { CustomAppPage } from "next/app";
 import Head from "next/head";
 import { useRouter } from "next/router";
@@ -12,15 +13,10 @@ const App: CustomAppPage = ({ Component, pageProps }) => {
       <Head>
         <title>Gorilla Todo</title>
       </Head>
-      {
-        // TODO ログインしているか検知して、ログインしていなければリダイレクト処理追加する
-        route.route.includes("login") ? (
-          // TODO Login画面作成後、ログイン画面を表示する
-          <></>
-        ) : (
-          <Component {...pageProps} />
-        )
-      }
+
+      <ChakraProvider>
+        <Component {...pageProps} />
+      </ChakraProvider>
     </>
   );
 };
