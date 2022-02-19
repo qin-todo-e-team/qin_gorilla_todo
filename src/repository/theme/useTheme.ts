@@ -1,5 +1,5 @@
 import { db } from "@config/firebase";
-import { themeCollection } from "@repo/theme/themeCollection";
+import { themeDoc } from "@repo/theme/themeDoc";
 import { doc, setDoc } from "firebase/firestore";
 import { useRouter } from "next/router";
 
@@ -16,7 +16,7 @@ export const useTheme = (): ThemeActions => {
 
   const onCreate = async (type: string) => {
     const data: Data = { theme: type };
-    await setDoc(doc(db, themeCollection(userId as string), "theme"), data);
+    await setDoc(doc(db, themeDoc(userId as string), "theme"), data);
   };
 
   return {
