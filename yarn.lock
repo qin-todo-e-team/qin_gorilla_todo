@@ -6978,6 +6978,11 @@ find-up@^5.0.0:
     locate-path "^6.0.0"
     path-exists "^4.0.0"
 
+firebase-react-hooks@^0.8.0:
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/firebase-react-hooks/-/firebase-react-hooks-0.8.0.tgz#11270133d4c4dcc74f88f443d622cbd01459e02b"
+  integrity sha512-qApUot2inmXJFyqEk36pjhBs/XOMK65i3812R70Q+U0Voo2+3kuBh3xiFLI0iyYySj80X1Osbi+hZYQQXaR/Kw==
+
 firebase@^9.6.6:
   version "9.6.6"
   resolved "https://registry.yarnpkg.com/firebase/-/firebase-9.6.6.tgz#77f0b678d0d6ca48506807c107c28fead85be48d"
