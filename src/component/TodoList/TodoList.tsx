@@ -1,12 +1,13 @@
 import { CheckBox } from "src/component/CheckBox/CheckBox";
+import type { Todo } from "src/models/Todo";
 
 type Props = {
-  todayList: string[];
-  tomorrowList: string[];
-  nextList: string[];
+  todayList: Todo[];
+  tomorrowList: Todo[];
+  upcomingList: Todo[];
 };
 
-export const TodoList = ({ nextList, todayList, tomorrowList }: Props) => (
+export const TodoList = ({ todayList, tomorrowList, upcomingList }: Props) => (
   <>
     <div className="py-2 px-4">
       <CheckBox
@@ -25,7 +26,7 @@ export const TodoList = ({ nextList, todayList, tomorrowList }: Props) => (
         color="text-amber-400"
         backgroundColor="bg-amber-400"
         label="今度する"
-        todoList={nextList}
+        todoList={upcomingList}
       />
     </div>
   </>
