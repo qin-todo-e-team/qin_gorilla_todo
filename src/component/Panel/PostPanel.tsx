@@ -1,8 +1,8 @@
 import cc from "classcat";
 import React, { useState } from "react";
 
-import { PostButton } from "../ExampleButton/PostButton";
-import { PostTextBox } from "../ExampleButton/PostTextBox";
+import { PostButton } from "./PostButton";
+import { PostTextBox } from "./PostTextBox";
 
 type PostPanelSubmitType = {
   type: string;
@@ -10,25 +10,25 @@ type PostPanelSubmitType = {
 };
 
 type PostPanelPropsType = {
-  onSubmit?: (data: PostPanelSubmitType) => void | undefined;
-  onChange?: (value: string | undefined) => void | undefined;
+  onSubmit: (data: PostPanelSubmitType) => void;
+  onChange?: (value: string | undefined) => void; // TODO: テキストボックスに入力された値を返すイベント（不要であれば削除します）
   value?: string;
 };
 
 export const PostPanel: React.VFC<PostPanelPropsType> = ({
   onChange,
-  onSubmit,
+  onSubmit, // TODO: テキストボックスに入力された値を返すイベント（不要であれば削除します）
   value,
 }: PostPanelPropsType) => {
   const [textboxValue, setTextboxValue] = useState<string>(value ?? "");
+
+  // TODO: テキストボックスに入力された値を返すイベント（不要の場合削除）
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTextboxValue(e.target.value || "");
     onChange && onChange(textboxValue);
   };
-  const handleSubmit = (
-    e: React.MouseEvent<HTMLButtonElement>,
-    typeString: string
-  ) => {
+
+  const handleSubmit = (typeString: string) => {
     onSubmit &&
       onSubmit({
         type: typeString || "",
@@ -40,12 +40,7 @@ export const PostPanel: React.VFC<PostPanelPropsType> = ({
     <div className="fixed bottom-0 left-0 py-2 mx-auto w-full h-auto bg-white">
       <div className="group w-full">
         <div className="group flex justify-center mb-2 space-x-2 w-full">
-          <PostTextBox
-            value={textboxValue ?? ""}
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-              handleChange(event)
-            }
-          />
+          <PostTextBox value={textboxValue ?? ""} onChange={handleChange} />
         </div>
         <div
           className={cc([
@@ -55,20 +50,20 @@ export const PostPanel: React.VFC<PostPanelPropsType> = ({
         >
           <PostButton
             type="today"
-            onClick={(event: React.MouseEvent<HTMLButtonElement>) => {
-              handleSubmit(event, "today");
+            onClick={() => {
+              handleSubmit("today");
             }}
           />
           <PostButton
             type="tomorrow"
-            onClick={(event: React.MouseEvent<HTMLButtonElement>) => {
-              handleSubmit(event, "tomorrow");
+            onClick={() => {
+              handleSubmit("tomorrow");
             }}
           />
           <PostButton
             type="upcoming"
-            onClick={(event: React.MouseEvent<HTMLButtonElement>) => {
-              handleSubmit(event, "upcoming");
+            onClick={() => {
+              handleSubmit("upcoming");
             }}
           />
         </div>
