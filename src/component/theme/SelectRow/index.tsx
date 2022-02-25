@@ -8,8 +8,7 @@ type Props = {
 
 export const SelectRow: React.VFC<Props> = ({ children, type }) => {
   const { onCreate } = useTheme();
-  const { value } = useGetThemeSetting();
-  const checkedType = value?.docs[0].data().theme;
+  const { selectedTheme } = useGetThemeSetting();
 
   const clickHandler = async () => {
     await onCreate(type);
@@ -20,7 +19,7 @@ export const SelectRow: React.VFC<Props> = ({ children, type }) => {
       <button className={"py-2 w-full text-left"} onClick={clickHandler}>
         {children}
       </button>
-      <div>{checkedType && checkedType === type ? "✔︎" : ""}</div>
+      <div>{selectedTheme && selectedTheme === type ? "✔︎" : ""}</div>
     </li>
   );
 };
