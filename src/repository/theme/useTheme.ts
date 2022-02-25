@@ -1,10 +1,6 @@
 import { db } from "@config/firebase";
 import { themeDoc } from "@repo/theme/themeDoc";
-import type {
-  DocumentData,
-  FirestoreError,
-  QuerySnapshot,
-} from "firebase/firestore";
+import type { FirestoreError } from "firebase/firestore";
 import { collection, doc, setDoc } from "firebase/firestore";
 import { useRouter } from "next/router";
 import { useCollection } from "react-firebase-hooks/firestore";
@@ -18,7 +14,7 @@ type Data = {
 };
 
 export const useGetThemeSetting = (): {
-  value: QuerySnapshot<DocumentData> | undefined;
+  selectedTheme: string;
   loading: boolean;
   error: FirestoreError | undefined;
 } => {
@@ -31,7 +27,14 @@ export const useGetThemeSetting = (): {
     }
   );
 
-  return { value, loading, error };
+  let selectedTheme = "";
+  value?.docs.map((doc) => {
+    if (doc.id === "theme") {
+      selectedTheme = doc?.data().theme;
+    }
+  });
+
+  return { selectedTheme, loading, error };
 };
 
 export const useTheme = (): ThemeActions => {
