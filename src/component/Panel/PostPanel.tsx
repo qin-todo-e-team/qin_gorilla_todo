@@ -10,21 +10,24 @@ type PostPanelSubmitType = {
 };
 
 type PostPanelPropsType = {
-  onSubmit: (data: PostPanelSubmitType) => void | undefined;
-  onChange?: (value: string | undefined) => void | undefined;
+  onSubmit: (data: PostPanelSubmitType) => void;
+  onChange?: (value: string | undefined) => void; // TODO: テキストボックスに入力された値を返すイベント（不要であれば削除します）
   value?: string;
 };
 
 export const PostPanel: React.VFC<PostPanelPropsType> = ({
   onChange,
-  onSubmit,
+  onSubmit, // TODO: テキストボックスに入力された値を返すイベント（不要であれば削除します）
   value,
 }: PostPanelPropsType) => {
   const [textboxValue, setTextboxValue] = useState<string>(value ?? "");
+
+  // TODO: テキストボックスに入力された値を返すイベント（不要の場合削除）
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTextboxValue(e.target.value || "");
     onChange && onChange(textboxValue);
   };
+
   const handleSubmit = (typeString: string) => {
     onSubmit &&
       onSubmit({
