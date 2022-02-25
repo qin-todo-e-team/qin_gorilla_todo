@@ -1,18 +1,22 @@
 import "../src/style/index.css";
 
+import { ChakraProvider } from "@chakra-ui/react";
 import type { CustomAppPage } from "next/app";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import { memo } from "react";
 
 const App: CustomAppPage = ({ Component, pageProps }) => {
-  const getLayout = Component.getLayout || ((page) => page);
-
+  const route = useRouter();
   return (
     <>
       <Head>
-        <title>nexst</title>
+        <title>Gorilla Todo</title>
       </Head>
-      {getLayout(<Component {...pageProps} />)}
+
+      <ChakraProvider>
+        <Component {...pageProps} />
+      </ChakraProvider>
     </>
   );
 };
