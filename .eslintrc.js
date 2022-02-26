@@ -5,7 +5,6 @@ module.exports = {
   settings: { tailwindcss: { groupByResponsive: true } },
   plugins: [
     "simple-import-sort",
-    "sort-destructure-keys",
     "tailwindcss",
     "import-access",
     "testing-library",
