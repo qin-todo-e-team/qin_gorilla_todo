@@ -26,11 +26,6 @@ module.exports = {
     "prefer-arrow-callback": "error",
     "prefer-const": "error",
     "func-style": ["error", "expression"],
-    "arrow-body-style": [
-      "error",
-      "as-needed",
-      { requireReturnForObjectLiteral: true },
-    ],
     // react
     "react/display-name": "error",
     "react/jsx-handler-names": [
@@ -49,7 +44,6 @@ module.exports = {
     "import-access/jsdoc": "error",
     "simple-import-sort/imports": "error",
     "simple-import-sort/exports": "error",
-    "sort-destructure-keys/sort-destructure-keys": 2,
     // @typescript-eslint
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/no-var-requires": "off",
