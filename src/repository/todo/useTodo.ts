@@ -13,9 +13,9 @@ type TodoActions = {
 export const useTodo = (): TodoActions => {
   const { userId } = useRouter().query;
 
-  const onCreate = async (expire: string, value: string) => {
+  const onCreate = async (expireDateType: string, value: string) => {
     const data: Todo = {
-      expire: getExpireDate(expire),
+      expire: getExpireDate(expireDateType),
       name: value ?? "",
       isDeleted: TodoDefault.isDeleted,
       isFinished: TodoDefault.isFinished,

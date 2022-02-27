@@ -30,11 +30,11 @@ export const PostPanel: React.VFC<PostPanelPropsType> = ({
     onChange && onChange(textboxValue);
   };
 
-  const handleSubmit = async (typeString: string) => {
-    await onCreate(typeString, textboxValue);
+  const handleSubmit = async (expireDateType: string) => {
+    await onCreate(expireDateType, textboxValue);
     onSubmit &&
       onSubmit({
-        type: typeString || "",
+        type: expireDateType || "",
         value: textboxValue || "",
       });
     setTextboxValue("");
