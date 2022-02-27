@@ -1,3 +1,4 @@
+import { useTodo } from "@repo/todo/useTodo";
 import cc from "classcat";
 import React, { useState } from "react";
 
@@ -21,6 +22,7 @@ export const PostPanel: React.VFC<PostPanelPropsType> = ({
   value,
 }: PostPanelPropsType) => {
   const [textboxValue, setTextboxValue] = useState<string>(value ?? "");
+  const { onCreate } = useTodo();
 
   // TODO: テキストボックスに入力された値を返すイベント（不要の場合削除）
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -28,14 +30,16 @@ export const PostPanel: React.VFC<PostPanelPropsType> = ({
     onChange && onChange(textboxValue);
   };
 
-  const handleSubmit = (typeString: string) => {
+  const handleSubmit = async (expireDateType: string) => {
+    await onCreate(expireDateType, textboxValue);
     onSubmit &&
       onSubmit({
-        type: typeString || "",
+        type: expireDateType || "",
         value: textboxValue || "",
       });
     setTextboxValue("");
   };
+
   return (
     <div className="fixed bottom-0 left-0 py-2 mx-auto w-full h-auto bg-white">
       <div className="group w-full">
