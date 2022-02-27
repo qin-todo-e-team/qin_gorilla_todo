@@ -24,6 +24,7 @@ export const db = getFirestore(app);
 export const provider = new GoogleAuthProvider();
 export const auth = getAuth(app);
 export const googleSignin = () => {
+  // eslint-disable-next-line no-unused-vars
   (async () => {
     try {
       await signInWithPopup(auth, provider);
