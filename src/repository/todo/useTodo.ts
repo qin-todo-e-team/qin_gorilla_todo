@@ -1,5 +1,6 @@
 import { db } from "@config/firebase";
 import type { Todo } from "@models/Todo";
+import { TodoDefault } from "@models/Todo";
 import { todoCollection } from "@repo/todo/todoCollection";
 import { addDoc, collection } from "firebase/firestore";
 import { useRouter } from "next/router";
@@ -32,8 +33,8 @@ export const useTodo = (): TodoActions => {
     const data: Todo = {
       expire: getExpireDate(expire),
       name: value ?? "",
-      isDeleted: false,
-      isFinished: false,
+      isDeleted: TodoDefault.isDeleted,
+      isFinished: TodoDefault.isFinished,
     };
     await addDoc(collection(db, todoCollection(userId as string)), data);
   };
