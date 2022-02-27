@@ -1,4 +1,5 @@
 import { db } from "@config/firebase";
+import { getExpireDate } from "@lib/getExpireDate";
 import type { Todo } from "@models/Todo";
 import { TodoDefault } from "@models/Todo";
 import { todoCollection } from "@repo/todo/todoCollection";
@@ -9,26 +10,9 @@ type TodoActions = {
   onCreate: (expire: string, value: string) => Promise<void>;
 };
 
-const getExpireDate = (expire: string) => {
-  const now = new Date();
-  switch (expire) {
-    case "today":
-      return now;
-    case "tomorrow":
-      const tomorrow = new Date(now);
-      tomorrow.setDate(now.getDate() + 1);
-      return tomorrow;
-    case "upcoming":
-      const upcoming = new Date(now);
-      upcoming.setDate(now.getDate() + 9999); // TODO: 仮で9999日後に設定
-      return upcoming;
-    default:
-      return now;
-  }
-};
-
 export const useTodo = (): TodoActions => {
   const { userId } = useRouter().query;
+
   const onCreate = async (expire: string, value: string) => {
     const data: Todo = {
       expire: getExpireDate(expire),

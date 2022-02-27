@@ -39,6 +39,7 @@ export const PostPanel: React.VFC<PostPanelPropsType> = ({
       });
     setTextboxValue("");
   };
+
   return (
     <div className="fixed bottom-0 left-0 py-2 mx-auto w-full h-auto bg-white">
       <div className="group w-full">
