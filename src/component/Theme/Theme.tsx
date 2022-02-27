@@ -22,14 +22,16 @@ const themes: TThemesTypes[] = [
   },
 ];
 
-export const Theme: React.VFC = () => (
-  <div className={"mt-8"}>
-    <ul className={"px-5"}>
-      {themes.map(({ label, type }) => (
-        <SelectRow key={type} type={type}>
-          {label}
-        </SelectRow>
-      ))}
-    </ul>
-  </div>
-);
+export const Theme: React.VFC = () => {
+  return (
+    <div className={"mt-8"}>
+      <ul className={"px-5"}>
+        {themes.map(({ label, type }) => (
+          <SelectRow key={type} type={type}>
+            {label}
+          </SelectRow>
+        ))}
+      </ul>
+    </div>
+  );
+};

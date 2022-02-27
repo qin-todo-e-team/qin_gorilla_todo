@@ -1,5 +1,5 @@
 import { SettingLayout } from "@component/Layout/setting";
-import { Theme } from "@component/theme";
+import { Theme } from "@component/Theme";
 import type { NextPage } from "next";
 
 const Index: NextPage = () => (

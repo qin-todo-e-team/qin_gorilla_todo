@@ -1,4 +1,8 @@
-import { useGetThemeSetting, useTheme } from "@repo/theme/useTheme";
+import {
+  useGetThemeSetting,
+  useTheme as useThemeSetting,
+} from "@repo/theme/useTheme";
+import { useTheme } from "next-themes";
 import React from "react";
 
 type Props = {
@@ -7,10 +11,12 @@ type Props = {
 };
 
 export const SelectRow: React.VFC<Props> = ({ children, type }) => {
-  const { onCreate } = useTheme();
   const { selectedTheme } = useGetThemeSetting();
+  const { onCreate } = useThemeSetting();
+  const { theme, setTheme } = useTheme();
 
   const clickHandler = async () => {
+    setTheme(type);
     await onCreate(type);
   };
 
