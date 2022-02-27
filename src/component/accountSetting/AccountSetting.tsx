@@ -39,7 +39,7 @@ export const Account: React.VFC = () => {
 
   return (
     <div className="my-8">
-      <div className={"px-5 w-full text-sm font-bold text-left text-gray-300"}>
+      <div className="px-5 w-full text-sm font-bold text-left text-gray-300">
         アカウントの操作
       </div>
       <ul className={"px-5 pt-2"}>
