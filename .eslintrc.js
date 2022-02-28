@@ -18,7 +18,6 @@ module.exports = {
   ],
   rules: {
     curly: "error",
-    "no-console": ["error", { allow: ["warn", "info", "error"] }],
     "no-restricted-syntax": [
       "error",
       { selector: "TSEnumDeclaration", message: "Don't declare enums" },
