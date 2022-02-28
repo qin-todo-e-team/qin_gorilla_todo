@@ -1,13 +1,13 @@
+import { RadioButton } from "@component/RadioButton";
 import { useState } from "react";
+import type { Todo } from "src/models/Todo";
 
 type Props = {
   label: string;
   color: string;
   backgroundColor: string;
-  todoList?: string[];
+  todoList: Todo[];
 };
-
-const classNames = (...classes: string[]) => classes.filter(Boolean).join(" ");
 
 export const CheckBox = ({
   backgroundColor,
@@ -15,37 +15,42 @@ export const CheckBox = ({
   label,
   todoList,
 }: Props) => {
-  const [isFinished, setIsFinished] = useState<boolean>(false);
-
-  const handleIsFinished = () => {
-    setIsFinished((prev) => !prev);
+  const [isFinished, setIsFinished] = useState<boolean[]>(
+    todoList.map((todo) => todo.isFinished)
+  );
+  const handleFinished = (i: number) => {
+    const newArray: boolean[] = isFinished.map((flag, index) =>
+      i === index ? !flag : flag
+    );
+    setIsFinished(newArray);
   };
 
   return (
     <>
       <div className="mb-8">
-        <h1 className={`p-2 text-xl ${color}`}>{label}</h1>
-
-        {todoList &&
-          todoList.map((item, index) => (
-            <div key={index} className="flex items-center">
-              <button
-                title="taskButton"
-                className={classNames(
-                  "p-2 m-2 border-2 border-gray-200 rounded-full",
-                  isFinished ? backgroundColor : "bg-white"
-                )}
-                onClick={handleIsFinished}
-              />
-              <div
-                className={
-                  isFinished ? "text-gray-500 line-through" : "text-base"
-                }
-              >
-                {item}
+        <h1 className={`p-2 text-xl font-bold ${color}`}>{label}</h1>
+        <div>
+          <div className="flex flex-col">
+            {todoList.map((todo, index) => (
+              <div key={index} className="flex items-center p-2">
+                <RadioButton
+                  color={backgroundColor}
+                  isSelected={isFinished[index]}
+                  handleSelected={() => handleFinished(index)}
+                />
+                <div
+                  className={`ml-2 text-lg ${
+                    isFinished[index]
+                      ? "text-gray-500 line-through"
+                      : "text-base"
+                  }`}
+                >
+                  {todo.name}
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
+        </div>
       </div>
     </>
   );
