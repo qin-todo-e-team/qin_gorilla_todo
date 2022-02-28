@@ -1,7 +1,13 @@
 // Import the functions you need from the SDKs you need
-import { async } from "@firebase/util";
 import { initializeApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import {
+  deleteUser,
+  getAuth,
+  GoogleAuthProvider,
+  onAuthStateChanged as onFirebaseAuthStateChanged,
+  signInWithPopup,
+  signOut,
+} from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -23,13 +29,41 @@ export const db = getFirestore(app);
 
 export const provider = new GoogleAuthProvider();
 export const auth = getAuth(app);
-export const googleSignin = () => {
-  // eslint-disable-next-line no-unused-vars
-  (async () => {
-    try {
-      await signInWithPopup(auth, provider);
-    } catch (error) {
-      console.error(error);
-    }
-  })();
+
+export const login = (): void => {
+  const auth = getAuth(app);
+  signInWithPopup(auth, provider);
+};
+
+export const logout = (): Promise<void> =>
+  new Promise((resolve, reject) => {
+    const auth = getAuth(app);
+    signOut(auth)
+      .then(() => resolve())
+      .catch((error) => reject(error));
+  });
+
+export const deleteCurrentUser = (): void => {
+  const auth = getAuth(app);
+  const user = auth.currentUser;
+  if (user) {
+    deleteUser(user);
+  }
+};
+
+export type User = {
+  displayName: string | null | undefined;
+};
+
+export const onAuthStateChanged = (callback: (user: User | null) => void) => {
+  const auth = getAuth(app);
+
+  onFirebaseAuthStateChanged(auth, (user) => {
+    const userInfo: User | null = user
+      ? {
+          displayName: user?.displayName,
+        }
+      : null;
+    callback(userInfo);
+  });
 };

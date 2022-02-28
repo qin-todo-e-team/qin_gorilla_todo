@@ -4,6 +4,7 @@ import { ChakraProvider } from "@chakra-ui/react";
 import type { CustomAppPage } from "next/app";
 import Head from "next/head";
 import { memo } from "react";
+import { AuthProvider } from "src/context/AuthContext";
 
 const App: CustomAppPage = ({ Component, pageProps }) => (
   <>
@@ -11,9 +12,11 @@ const App: CustomAppPage = ({ Component, pageProps }) => (
       <title>Gorilla Todo</title>
     </Head>
 
-    <ChakraProvider>
-      <Component {...pageProps} />
-    </ChakraProvider>
+    <AuthProvider>
+      <ChakraProvider>
+        <Component {...pageProps} />
+      </ChakraProvider>
+    </AuthProvider>
   </>
 );
 
