@@ -58,21 +58,10 @@ module.exports = {
       "warn",
       { prefer: "type-imports" },
     ],
-    "@typescript-eslint/no-unused-vars": [
-      "error",
-      { varsIgnorePattern: "^_", argsIgnorePattern: "^_" },
-    ],
     "@typescript-eslint/naming-convention": [
       "error",
       { selector: ["typeAlias", "typeParameter"], format: ["PascalCase"] },
       { selector: ["property", "method"], format: ["camelCase"] },
-      {
-        selector: "variable",
-        types: ["boolean"],
-        format: ["PascalCase"],
-        prefix: ["no", "is", "has", "should"],
-        filter: { regex: "^_", match: false },
-      },
     ],
     // jsx-a11y
     "jsx-a11y/no-autofocus": "off",
