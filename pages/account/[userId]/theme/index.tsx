@@ -1,11 +1,6 @@
-import { SettingLayout } from "@component/Layout/setting";
-import { Theme } from "@component/theme";
-import type { NextPage } from "next";
+import type { CustomNextPage } from "next";
+import { Index } from "src/pages/account/[userId]/theme";
 
-const Index: NextPage = () => (
-  <SettingLayout title={"テーマ"}>
-    <Theme />
-  </SettingLayout>
-);
+const IndexPage: CustomNextPage = () => <Index />;
 
-export default Index;
+export default IndexPage;
