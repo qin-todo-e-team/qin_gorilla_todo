@@ -42,14 +42,14 @@ module.exports = {
         checkInlineFunction: true,
       },
     ],
-    "react/destructuring-assignment": ["error", "always"],
+    "react/destructuring-assignment": [0, "always"],
     // sort
     "import/newline-after-import": "error",
-    "import/no-default-export": "error",
+    "import/no-default-export": "off",
     "import-access/jsdoc": "error",
     "simple-import-sort/imports": "error",
     "simple-import-sort/exports": "error",
-    "sort-destructure-keys/sort-destructure-keys": 2,
+    "sort-destructure-keys/sort-destructure-keys": 0,
     // @typescript-eslint
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/no-var-requires": "off",
