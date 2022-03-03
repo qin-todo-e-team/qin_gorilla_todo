@@ -6,6 +6,8 @@ import Head from "next/head";
 import { memo } from "react";
 import { AuthProvider } from "src/context/AuthContext";
 
+import { ThemeProvider } from "../src/provider/ThemeProvider";
+
 const App: CustomAppPage = ({ Component, pageProps }) => (
   <>
     <Head>
@@ -14,7 +16,9 @@ const App: CustomAppPage = ({ Component, pageProps }) => (
 
     <AuthProvider>
       <ChakraProvider>
-        <Component {...pageProps} />
+        <ThemeProvider>
+          <Component {...pageProps} />
+        </ThemeProvider>
       </ChakraProvider>
     </AuthProvider>
   </>
