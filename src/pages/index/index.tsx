@@ -11,7 +11,7 @@ export const Index: VFC = () => {
   return (
     <>
       <TodoList todayList={Todos} tomorrowList={Todos} upcomingList={Todos} />
-      <PostPanel />
+      {/* <PostPanel /> */}
     </>
   );
 };

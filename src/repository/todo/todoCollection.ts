@@ -1,1 +1,1 @@
-export const todoCollection = (userId: string) => `user/${userId}/todos/`;
+export const todoCollection = (userId: string) => `user/${userId}/todos`;
