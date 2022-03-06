@@ -6,40 +6,19 @@ import React, { useState } from "react";
 import { PostButton } from "./PostButton";
 import { PostTextBox } from "./PostTextBox";
 
-type PostPanelSubmitType = {
-  type: string;
-  value: string;
-};
-
-type PostPanelPropsType = {
-  onSubmit: (data: PostPanelSubmitType) => void;
-  onChange?: (value: string | undefined) => void; // TODO: テキストボックスに入力された値を返すイベント（不要であれば削除します）
-  value?: string;
-};
-
-export const PostPanel: React.VFC<PostPanelPropsType> = ({
-  onChange,
-  onSubmit, // TODO: テキストボックスに入力された値を返すイベント（不要であれば削除します）
-  value,
-}: PostPanelPropsType) => {
-  const [textboxValue, setTextboxValue] = useState<string>(value ?? "");
+export const PostPanel: React.VFC = () => {
+  const [input, setInput] = useState<string>("");
   const { onCreate } = useTodo();
   const bg = useColorModeValue("bg-white", "bg-[#1A202C]");
 
   // TODO: テキストボックスに入力された値を返すイベント（不要の場合削除）
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTextboxValue(e.target.value || "");
-    onChange && onChange(textboxValue);
+    setInput(e.target.value || "");
   };
 
-  const handleSubmit = async (expireDateType: string) => {
-    await onCreate(expireDateType, textboxValue);
-    onSubmit &&
-      onSubmit({
-        type: expireDateType || "",
-        value: textboxValue || "",
-      });
-    setTextboxValue("");
+  const handleSubmit = async (type: string) => {
+    await onCreate(type, input);
+    setInput("");
   };
 
   return (
@@ -48,32 +27,32 @@ export const PostPanel: React.VFC<PostPanelPropsType> = ({
     >
       <div className="group w-full">
         <div className="group flex justify-center mb-2 space-x-2 w-full">
-          <PostTextBox value={textboxValue ?? ""} onChange={handleChange} />
+          <PostTextBox value={input ?? ""} onChange={handleChange} />
         </div>
         <div
           className={cc([
             "flex justify-center mb-2 space-x-2 w-full transition",
-            { hidden: !textboxValue },
+            { hidden: !input },
           ])}
         >
           <PostButton
-            type="today"
-            onClick={() => {
-              handleSubmit("today");
-            }}
-          />
+            title="today"
+            onClickHandler={() => handleSubmit("today")}
+          >
+            ＋ 今日する
+          </PostButton>
           <PostButton
-            type="tomorrow"
-            onClick={() => {
-              handleSubmit("tomorrow");
-            }}
-          />
+            title="tomorrow"
+            onClickHandler={() => handleSubmit("tomorrow")}
+          >
+            ＋ 明日する
+          </PostButton>
           <PostButton
-            type="upcoming"
-            onClick={() => {
-              handleSubmit("upcoming");
-            }}
-          />
+            title="upcoming"
+            onClickHandler={() => handleSubmit("upcoming")}
+          >
+            ＋ いつかする
+          </PostButton>
         </div>
       </div>
     </div>
