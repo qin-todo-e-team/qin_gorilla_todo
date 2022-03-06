@@ -1,5 +1,5 @@
 import type { CustomNextPage } from "next";
-import { Index } from "src/pages/account/[userId]/theme";
+import { Index } from "src/pages/[userId]/account/theme";
 
 const IndexPage: CustomNextPage = () => <Index />;
 
