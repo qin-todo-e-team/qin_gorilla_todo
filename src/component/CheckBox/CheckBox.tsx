@@ -40,14 +40,14 @@ const ThemeLists: ThemeListType = {
 };
 
 export const CheckBox = ({ todoList, title }: Props) => {
-  const [isFinished, setIsFinished] = useState<boolean[]>(
+  const [isFinishedList, setIsFinishedList] = useState<boolean[]>(
     todoList.map((todo) => todo.isFinished)
   );
   const handleFinished = (index: number) => {
-    const newArray: boolean[] = isFinished.map((flag, i) =>
+    const newArray: boolean[] = isFinishedList.map((flag, i) =>
       index === i ? !flag : flag
     );
-    setIsFinished(newArray);
+    setIsFinishedList(newArray);
   };
 
   const { label, color, bg } = ThemeLists[title ?? "today"];
@@ -62,14 +62,15 @@ export const CheckBox = ({ todoList, title }: Props) => {
               <div key={index} className="flex items-center p-2 ">
                 <RadioButton
                   color={bg}
-                  isSelected={isFinished[index]}
+                  isSelected={isFinishedList[index]}
                   handleSelected={() => handleFinished(index)}
                 />
                 <div
                   className={cc([
                     "ml-2 text-lg",
                     {
-                      "text-gray-500 line-through ": isFinished[index] === true,
+                      "text-gray-500 line-through ":
+                        isFinishedList[index] === true,
                     },
                   ])}
                 >
