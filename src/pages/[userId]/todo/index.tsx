@@ -11,11 +11,7 @@ export const Index: React.VFC = () => {
   return (
     <>
       <TodoList todayList={Todos} tomorrowList={Todos} upcomingList={Todos} />
-      <PostPanel
-        onSubmit={(data) => {
-          setNextToDoList((prev) => [...prev, data.value]);
-        }}
-      />
+      <PostPanel />
     </>
   );
 };
