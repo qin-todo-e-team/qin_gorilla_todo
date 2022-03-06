@@ -62,7 +62,8 @@ module.exports = {
     "@typescript-eslint/naming-convention": [
       "error",
       { selector: ["typeAlias", "typeParameter"], format: ["PascalCase"] },
-      { selector: ["property", "method"], format: ["camelCase"] },
+      // propertyとmethodをキャメルケースで書く必要があるルール
+      // { selector: ["property", "method"], format: ["camelCase"] },
     ],
     // jsx-a11y
     "jsx-a11y/no-autofocus": "off",
