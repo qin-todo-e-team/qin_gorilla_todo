@@ -1,33 +1,6 @@
 import { SelectRow } from "@component/MyPage/SelectRow";
+import { settings, supports } from "@config/mypage";
 import React from "react";
-
-type Types = {
-  label: string;
-};
-
-const settings: Types[] = [
-  {
-    label: "プロフィール設定",
-  },
-  {
-    label: "アカウント設定",
-  },
-  {
-    label: "テーマ",
-  },
-];
-
-const supports: Types[] = [
-  {
-    label: "プライバシーポリシー",
-  },
-  {
-    label: "利用規約",
-  },
-  {
-    label: "オープンソースライセンス",
-  },
-];
 
 export const MyPage: React.VFC = () => (
   <div>
@@ -36,9 +9,9 @@ export const MyPage: React.VFC = () => (
         設定
       </div>
       <ul className={"px-5 pt-2"}>
-        {settings.map(({ label }) => (
+        {settings.map(({ label, url }) => (
           <div key={label}>
-            <SelectRow>{label}</SelectRow>
+            <SelectRow url={url}>{label}</SelectRow>
           </div>
         ))}
       </ul>
@@ -49,9 +22,9 @@ export const MyPage: React.VFC = () => (
         サポート
       </div>
       <ul className={"px-5 pt-2"}>
-        {supports.map(({ label }) => (
+        {supports.map(({ label, url }) => (
           <div key={label}>
-            <SelectRow>{label}</SelectRow>
+            <SelectRow url={url}>{label}</SelectRow>
           </div>
         ))}
         <li>
