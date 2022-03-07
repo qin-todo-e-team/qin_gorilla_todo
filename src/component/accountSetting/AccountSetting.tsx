@@ -6,7 +6,6 @@ import {
   ModalHeader,
   ModalOverlay,
 } from "@chakra-ui/react";
-import Link from "next/link";
 import React, { useState } from "react";
 
 import { deleteCurrentUser, logout } from "../../../config/firebase";
@@ -72,16 +71,12 @@ export const Account: React.VFC = () => {
                     >
                       キャンセル
                     </button>
-                    <Link href={"/login"}>
-                      <button
-                        className="w-[104px] h-[36px] text-xs font-bold text-white bg-red-500 rounded-full"
-                        onClick={
-                          label === "ログアウト" ? logoutUser : deleteUser
-                        }
-                      >
-                        OK
-                      </button>
-                    </Link>
+                    <button
+                      className="w-[104px] h-[36px] text-xs font-bold text-white bg-red-500 rounded-full"
+                      onClick={label === "ログアウト" ? logoutUser : deleteUser}
+                    >
+                      OK
+                    </button>
                   </div>
                 </ModalFooter>
               </ModalContent>

@@ -19,6 +19,7 @@ export const AuthProvider: React.FC = ({ children }) => {
       setCurrentUser(user);
     });
   }, []);
+
   return (
     <AuthContext.Provider value={{ currentUser: currentUser }}>
       {children}
