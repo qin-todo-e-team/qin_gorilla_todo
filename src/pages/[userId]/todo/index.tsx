@@ -10,7 +10,8 @@ export const Index: React.VFC = () => {
   const [nextToDoList, setNextToDoList] = useState(nextList);
   return (
     <>
-      <TodoList todoList={Todos} />
+      <TodoList todayList={Todos} tomorrowList={Todos} upcomingList={Todos} />
+      <PostPanel />
     </>
   );
 };
