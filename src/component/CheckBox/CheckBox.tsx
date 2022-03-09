@@ -1,11 +1,14 @@
 import { RadioButton } from "@component/RadioButton";
+import { useTodo } from "@repo/todo/useTodo";
 import cc from "classcat";
-import { useState } from "react";
-import type { Todo } from "src/models/Todo";
+import type { DocumentData } from "firebase/firestore";
+import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
+import { HiOutlineDuplicate } from "react-icons/hi";
+import type { TodoListType } from "src/models/Todo";
 
 type Props = {
   title: "today" | "upcoming" | "tomorrow" | undefined;
-  todoList: Todo[];
+  todoList: TodoListType[] | DocumentData[] | undefined;
   children?: React.ReactNode;
 };
 
@@ -34,53 +37,79 @@ const ThemeLists: ThemeListType = {
   },
   upcoming: {
     label: "今度する",
-    color: "bg-amber-400",
+    color: "text-amber-400",
     bg: "bg-amber-400",
   },
 };
 
 export const CheckBox = ({ todoList, title }: Props) => {
-  const [isFinishedList, setIsFinishedList] = useState<boolean[]>(
-    todoList.map((todo) => todo.isFinished)
-  );
-  const handleFinished = (index: number) => {
-    const newArray: boolean[] = isFinishedList.map((flag, i) =>
-      index === i ? !flag : flag
-    );
-    setIsFinishedList(newArray);
-  };
-
+  const { onCreate, onUpdate, onDelete } = useTodo();
   const { label, color, bg } = ThemeLists[title ?? "today"];
 
   return (
-    <>
-      <div className="mb-8">
-        <h1 className={cc(["p-2 text-xl font-bold", color])}>{label}</h1>
-        <div>
-          <div className="flex flex-col">
-            {todoList.map((todo, index) => (
-              <div key={index} className="flex items-center p-2 ">
+    <div className="w-full">
+      <h1 className={cc(["p-2 text-xl font-bold", color])}>{label}</h1>
+      <div>
+        <div className="flex flex-col">
+          {todoList?.map((todo, index) => (
+            <div key={index} className="group flex items-center p-2 space-x-4">
+              <div className="shrink-0 w-7">
                 <RadioButton
                   color={bg}
-                  isSelected={isFinishedList[index]}
-                  handleSelected={() => handleFinished(index)}
+                  isSelected={todo.todoData.isFinished}
+                  handleSelected={() =>
+                    onUpdate(todo.todoId, {
+                      isFinished: !todo.todoData.isFinished,
+                    })
+                  }
                 />
-                <div
-                  className={cc([
-                    "ml-2 text-lg",
-                    {
-                      "text-gray-500 line-through ":
-                        isFinishedList[index] === true,
-                    },
-                  ])}
-                >
-                  {todo.name}
+              </div>
+
+              <div
+                className={cc([
+                  "ml-2 text-lg flex-1 whitespace-pre-line break-all",
+                  {
+                    "text-gray-500 line-through ":
+                      todo.todoData.isFinished === true,
+                  },
+                ])}
+              >
+                {todo.todoData.name}
+              </div>
+              <div className="hidden group-hover:block shrink-0 group-hover:text-gray-500">
+                <div className="flex justify-between items-center space-x-2">
+                  <button
+                    type="button"
+                    onClick={() =>
+                      onCreate(title ?? "today", todo.todoData.name)
+                    }
+                    title="edit"
+                    className="flex justify-center items-center"
+                  >
+                    <HiOutlineDuplicate className="text-xl " />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => alert("編集したい！！！！")}
+                    title="edit"
+                    className="flex justify-center items-center"
+                  >
+                    <AiOutlineEdit className="text-xl " />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => onDelete(todo.todoId)}
+                    title="delete"
+                    className="flex justify-center items-center"
+                  >
+                    <AiOutlineDelete className="text-xl " />
+                  </button>
                 </div>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
       </div>
-    </>
+    </div>
   );
 };
