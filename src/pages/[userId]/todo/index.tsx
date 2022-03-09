@@ -1,14 +1,15 @@
+import { PostPanel } from "@component/Panel/PostPanel";
+import { TodoList } from "@component/TodoList";
 import { db } from "config/firebase";
 import type { DocumentData, FirestoreError } from "firebase/firestore";
 import { collection } from "firebase/firestore";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React from "react";
 import { useCollection } from "react-firebase-hooks/firestore";
 import { todoCollection } from "src/repository/todo/todoCollection";
 
-export const FirestoreCollection = (
-  Todos: string
-): {
+export const FirestoreCollection = (): {
+  // TODO: 不要なら削除
   // value: QuerySnapshot<DocumentData> | undefined;
   data: DocumentData[] | undefined;
   loading: boolean;
@@ -22,34 +23,22 @@ export const FirestoreCollection = (
     }
   );
 
-  const data = value?.docs.map((d) => d.data());
+  const data = value?.docs.map((d) => {
+    return { todoId: d.id, todoData: d.data() };
+  });
 
   return { data, loading, error };
 };
 
-const nextList: string[] = ["Qin Todo", "A simple todo app", "by Qin"];
-
 export const Index = () => {
-  const [nextToDoList, setNextToDoList] = useState(nextList);
-  const { data } = FirestoreCollection("Todos");
-  // const todayList = value?.docs.map((doc) => doc.data().name) ?? [];
-  // const tomorrowList = value?.docs.map((doc) => doc.data().name) ?? [];
+  const { data } = FirestoreCollection();
 
   return (
     <>
-      {data?.map((d) => (
-        <div key={d.name}>{d.name}</div>
-      ))}
-      {/*<TodoList*/}
-      {/*  todayList={todayList}*/}
-      {/*  tomorrowList={tomorrowList}*/}
-      {/*  nextList={nextToDoList}*/}
-      {/*/>*/}
-      {/*<PostPanel*/}
-      {/*  onSubmit={(data) => {*/}
-      {/*    setNextToDoList((prev) => [...prev, data.value]);*/}
-      {/*  }}*/}
-      {/*/>*/}
+      <main className="mx-auto mb-8 w-full min-w-[300px] max-w-[600px]">
+        <TodoList todoList={data} />
+      </main>
+      <PostPanel />
     </>
   );
 };
