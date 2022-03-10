@@ -8,6 +8,9 @@ const nextConfig = {
   poweredByHeader: false,
   swcMinify: true,
   // experimental: { concurrentFeatures: true, serverComponents: true },
+  images: {
+    domains: ["firebasestorage.googleapis.com"],
+  },
 };
 
 export default nextConfig;
