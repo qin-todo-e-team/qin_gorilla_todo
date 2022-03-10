@@ -11,7 +11,7 @@ export const Profile: React.VFC = () => {
     imageRef,
     onChangeName,
     onChangeImage,
-    onClickOpenFileDialog,
+    onOpenFileDialog,
     onClickFileUpLoad,
   } = useProfile();
 
@@ -25,13 +25,13 @@ export const Profile: React.VFC = () => {
           {imageUrl ? (
             <Image
               src={imageUrl}
-              alt=""
+              alt="avatar"
               width={96}
               height={96}
               className="object-cover object-center w-24 h-24 rounded-full"
             />
           ) : (
-            <div className="w-24 h-24 bg-[#C2C6D2] rounded-full"></div>
+            <div className="w-24 h-24 bg-[#C2C6D2] rounded-full" />
           )}
           <input
             ref={imageRef}
@@ -42,7 +42,7 @@ export const Profile: React.VFC = () => {
             accept="image/*"
           />
           <button
-            onClick={onClickOpenFileDialog}
+            onClick={onOpenFileDialog}
             className="py-2.5 px-4 text-xs font-bold text-[#070417] bg-slate-100 rounded-full"
           >
             変更する
@@ -64,10 +64,7 @@ export const Profile: React.VFC = () => {
           <p className="mt-0.5 ml-4 text-sm text-red-500">入力必須です</p>
         )}
         {loading ? (
-          <button
-            onClick={onClickFileUpLoad}
-            className="p-4 mt-9 w-full text-xs font-bold text-white bg-blue-400 rounded-full"
-          >
+          <button className="p-4 mt-9 w-full text-xs font-bold text-white bg-blue-400 rounded-full">
             保存中
           </button>
         ) : (

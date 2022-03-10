@@ -6,7 +6,19 @@ import { useRouter } from "next/router";
 import type React from "react";
 import { useEffect, useRef, useState } from "react";
 
-export const useProfile = () => {
+type ProfileActions = {
+  name: string;
+  imageUrl: string;
+  nameRequired: boolean;
+  loading: boolean;
+  imageRef: React.RefObject<HTMLInputElement>;
+  onChangeName: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeImage: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onOpenFileDialog: () => void;
+  onClickFileUpLoad: () => Promise<void>;
+};
+
+export const useProfile = (): ProfileActions => {
   const [name, setName] = useState<string>("");
   const [image, setImage] = useState<File | null | undefined>();
   const [imageUrl, setImageUrl] = useState<string>("");
@@ -31,7 +43,7 @@ export const useProfile = () => {
     }
   }, [router, userId]);
 
-  const onClickOpenFileDialog = () => {
+  const onOpenFileDialog = () => {
     imageRef.current?.click();
   };
 
@@ -91,7 +103,7 @@ export const useProfile = () => {
     imageRef,
     onChangeName,
     onChangeImage,
-    onClickOpenFileDialog,
+    onOpenFileDialog,
     onClickFileUpLoad,
   };
 };
