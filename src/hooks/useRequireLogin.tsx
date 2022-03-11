@@ -5,8 +5,9 @@ import { useAuthContext } from "src/context/AuthContext";
 export const useRequireLogin = () => {
   const router = useRouter();
   const { currentUser } = useAuthContext();
+  const uid = currentUser?.uid;
 
   useEffect(() => {
-    currentUser ? router.push("/1/todo") : router.push("/login");
+    currentUser ? router.push(`/${uid}/todo`) : router.push("/login");
   }, [currentUser]);
 };

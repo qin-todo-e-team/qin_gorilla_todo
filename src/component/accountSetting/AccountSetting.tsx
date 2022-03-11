@@ -6,6 +6,7 @@ import {
   ModalHeader,
   ModalOverlay,
 } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 import React, { useState } from "react";
 
 import { deleteCurrentUser, logout } from "../../../config/firebase";
@@ -29,6 +30,7 @@ const accountSettings: Types[] = [
 
 export const Account: React.VFC = () => {
   const [selectedItem, setSelectedItem] = useState<string>("");
+  const router = useRouter();
 
   const onOpen = (label: string) => {
     setSelectedItem(label);
@@ -41,11 +43,13 @@ export const Account: React.VFC = () => {
   const logoutUser = () => {
     logout();
     setSelectedItem("");
+    router.push("/login");
   };
 
   const deleteUser = () => {
     deleteCurrentUser();
     setSelectedItem("");
+    router.push("/login");
   };
 
   return (

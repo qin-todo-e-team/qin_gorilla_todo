@@ -54,7 +54,7 @@ export const deleteCurrentUser = (): void => {
 };
 
 export type User = {
-  displayName: string | null | undefined;
+  uid: string | null | undefined;
 };
 
 export const onAuthStateChanged = (callback: (user: User | null) => void) => {
@@ -63,7 +63,7 @@ export const onAuthStateChanged = (callback: (user: User | null) => void) => {
   onFirebaseAuthStateChanged(auth, (user) => {
     const userInfo: User | null = user
       ? {
-          displayName: user?.displayName,
+          uid: user?.uid,
         }
       : null;
     callback(userInfo);
