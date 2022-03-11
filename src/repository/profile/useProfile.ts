@@ -1,5 +1,6 @@
 import { db, storage } from "@config/firebase";
 import { profileDoc, profileRef } from "@repo/profile/profileDoc";
+import { useToast } from "@repo/toast/useToast";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { useRouter } from "next/router";
@@ -27,6 +28,7 @@ export const useProfile = (): ProfileActions => {
   const imageRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
   const { userId } = router.query;
+  const { successToast, errorToast } = useToast();
 
   useEffect(() => {
     if (router.isReady) {
@@ -55,7 +57,7 @@ export const useProfile = (): ProfileActions => {
     }
 
     if (sizeLimit < file.size) {
-      alert("ファイルサイズは1MB以下にしてください");
+      errorToast("ファイルサイズは1MB以下にしてください");
       e.target.value = "";
       return;
     }
@@ -76,18 +78,28 @@ export const useProfile = (): ProfileActions => {
       const snapshot = await uploadBytes(storageRef, image);
       const url = await getDownloadURL(snapshot.ref);
 
-      await setDoc(
-        doc(db, profileDoc(userId as string), "profile"),
-        { url: url },
-        { merge: true }
-      );
+      try {
+        await setDoc(
+          doc(db, profileDoc(userId as string), "profile"),
+          { url: url },
+          { merge: true }
+        );
+        successToast("アイコンを変更しました");
+      } catch (e) {
+        errorToast("アイコンの変更に失敗しました");
+      }
     }
     if (name) {
-      await setDoc(
-        doc(db, profileDoc(userId as string), "profile"),
-        { name: name },
-        { merge: true }
-      );
+      try {
+        await setDoc(
+          doc(db, profileDoc(userId as string), "profile"),
+          { name: name },
+          { merge: true }
+        );
+        successToast("名前を変更しました");
+      } catch (e) {
+        errorToast("名前の変更に失敗しました");
+      }
       setNameRequired(false);
     } else {
       setNameRequired(true);
