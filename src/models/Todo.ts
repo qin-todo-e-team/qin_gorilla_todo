@@ -6,6 +6,11 @@ export type Todo = {
   isDeleted: boolean;
 };
 
+export type TodoListType = {
+  todoId: string;
+  todoData: Todo;
+};
+
 export const TodoDefault = {
   name: "未入力",
   isFinished: false,
