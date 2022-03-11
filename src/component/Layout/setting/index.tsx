@@ -9,6 +9,6 @@ type Props = {
 export const SettingLayout: React.VFC<Props> = ({ children, title }) => (
   <div>
     <SettingTitle title={title} />
-    {children}
+    <div className={"mx-auto max-w-screen-md"}>{children}</div>
   </div>
 );
