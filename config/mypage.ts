@@ -6,7 +6,7 @@ type Types = {
 export const settings: Types[] = [
   {
     label: "プロフィール設定",
-    url: "/",
+    url: "/1/account/profile",
   },
   {
     label: "アカウント設定",
