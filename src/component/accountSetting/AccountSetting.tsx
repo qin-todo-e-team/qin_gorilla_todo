@@ -6,7 +6,7 @@ import {
   ModalHeader,
   ModalOverlay,
 } from "@chakra-ui/react";
-import Link from "next/link";
+import { useRouter } from "next/router";
 import React, { useState } from "react";
 
 import { deleteCurrentUser, logout } from "../../../config/firebase";
@@ -30,6 +30,7 @@ const accountSettings: Types[] = [
 
 export const Account: React.VFC = () => {
   const [selectedItem, setSelectedItem] = useState<string>("");
+  const router = useRouter();
 
   const onOpen = (label: string) => {
     setSelectedItem(label);
@@ -42,11 +43,13 @@ export const Account: React.VFC = () => {
   const logoutUser = () => {
     logout();
     setSelectedItem("");
+    router.push("/login");
   };
 
   const deleteUser = () => {
     deleteCurrentUser();
     setSelectedItem("");
+    router.push("/login");
   };
 
   return (
@@ -72,16 +75,12 @@ export const Account: React.VFC = () => {
                     >
                       キャンセル
                     </button>
-                    <Link href={"/login"}>
-                      <button
-                        className="w-[104px] h-[36px] text-xs font-bold text-white bg-red-500 rounded-full"
-                        onClick={
-                          label === "ログアウト" ? logoutUser : deleteUser
-                        }
-                      >
-                        OK
-                      </button>
-                    </Link>
+                    <button
+                      className="w-[104px] h-[36px] text-xs font-bold text-white bg-red-500 rounded-full"
+                      onClick={label === "ログアウト" ? logoutUser : deleteUser}
+                    >
+                      OK
+                    </button>
                   </div>
                 </ModalFooter>
               </ModalContent>
