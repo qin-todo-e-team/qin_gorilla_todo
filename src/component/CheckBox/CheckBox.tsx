@@ -47,7 +47,7 @@ export const CheckBox = ({ todoList, title }: Props) => {
   const { label, color, bg } = ThemeLists[title ?? "today"];
 
   return (
-    <div className="w-full">
+    <div className="mb-[70px] w-full">
       <h1 className={cc(["p-2 text-xl font-bold", color])}>{label}</h1>
       <div>
         <div className="flex flex-col">
