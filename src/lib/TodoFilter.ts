@@ -10,7 +10,7 @@ export const TodoFilter = (
   }
 
   return todoList.filter((todo) => {
-    const date = todo.todoData.expire.toDate();
+    const date = todo.todoData?.expire.toDate();
     if (!date) {
       return false;
     }
