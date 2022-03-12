@@ -2,6 +2,7 @@ import { db } from "@config/firebase";
 import { getExpireDate } from "@lib/getExpireDate";
 import type { Todo } from "@models/Todo";
 import { TodoDefault } from "@models/Todo";
+import { useToast } from "@repo/toast/useToast";
 import { todoCollection } from "@repo/todo/todoCollection";
 import {
   addDoc,
@@ -20,6 +21,7 @@ type TodoActions = {
 
 export const useTodo = (): TodoActions => {
   const { userId } = useRouter().query;
+  const { successToast, errorToast } = useToast();
 
   const onCreate = async (expireDateType: string, value: string) => {
     const data: Todo = {
@@ -30,24 +32,27 @@ export const useTodo = (): TodoActions => {
     };
     try {
       await addDoc(collection(db, todoCollection(userId as string)), data);
+      successToast("Todoを追加しました");
     } catch (error) {
-      console.error("Error : ", error);
+      errorToast("Todoの追加に失敗しました");
     }
   };
 
   const onUpdate = async (id: string, value: Partial<Todo>) => {
     try {
       await updateDoc(doc(db, todoCollection(userId as string), id), value);
+      successToast("Todoを更新しました");
     } catch (error) {
-      console.error("Error : ", error);
+      errorToast("Todoの更新に失敗しました");
     }
   };
 
   const onDelete = async (id: string) => {
     try {
       await deleteDoc(doc(db, todoCollection(userId as string), id));
+      successToast("Todoを削除しました");
     } catch (error) {
-      console.error("Error : ", error);
+      errorToast("Todoの削除に失敗しました");
     }
   };
 
