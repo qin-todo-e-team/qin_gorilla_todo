@@ -1,7 +1,8 @@
 import { useColorModeValue } from "@chakra-ui/react";
+import { useTodoContext } from "@context/TodoContext";
 import { useTodo } from "@repo/todo/useTodo";
 import cc from "classcat";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { PostButton } from "./PostButton";
 import { PostTextBox } from "./PostTextBox";
@@ -10,6 +11,7 @@ export const PostPanel: React.VFC = () => {
   const [input, setInput] = useState<string>("");
   const { onCreate } = useTodo();
   const bg = useColorModeValue("bg-white", "bg-[#1A202C]");
+  const { currentTodo } = useTodoContext();
 
   // TODO: テキストボックスに入力された値を返すイベント（不要の場合削除）
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -20,6 +22,10 @@ export const PostPanel: React.VFC = () => {
     await onCreate(type, input);
     setInput("");
   };
+
+  useEffect(() => {
+    setInput(currentTodo?.todoData.name);
+  }, [currentTodo]);
 
   return (
     <div

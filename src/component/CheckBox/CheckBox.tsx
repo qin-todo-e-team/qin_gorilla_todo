@@ -1,14 +1,15 @@
 import { RadioButton } from "@component/RadioButton";
+import { useTodoContext } from "@context/TodoContext";
 import { useTodo } from "@repo/todo/useTodo";
 import cc from "classcat";
 import type { DocumentData } from "firebase/firestore";
+import React from "react";
 import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
 import { HiOutlineDuplicate } from "react-icons/hi";
-import type { TodoListType } from "src/models/Todo";
 
 type Props = {
   title: "today" | "upcoming" | "tomorrow" | undefined;
-  todoList: TodoListType[] | DocumentData[] | undefined;
+  todoList: DocumentData[] | undefined;
   children?: React.ReactNode;
 };
 
@@ -45,6 +46,7 @@ const ThemeLists: ThemeListType = {
 export const CheckBox = ({ todoList, title }: Props) => {
   const { onCreate, onUpdate, onDelete } = useTodo();
   const { label, color, bg } = ThemeLists[title ?? "today"];
+  const { setCurrentTodo } = useTodoContext();
 
   return (
     <div className="mb-[70px] w-full">
@@ -52,7 +54,11 @@ export const CheckBox = ({ todoList, title }: Props) => {
       <div>
         <div className="flex flex-col">
           {todoList?.map((todo, index) => (
-            <div key={index} className="group flex items-center p-2 space-x-4">
+            <div
+              key={index}
+              className="group flex items-center p-2 space-x-4"
+              onClick={() => setCurrentTodo(todo)}
+            >
               <div className="shrink-0 w-7">
                 <RadioButton
                   color={bg}
