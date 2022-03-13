@@ -20,7 +20,8 @@
       "@models/*": ["./src/models/*"],
       "@component/*": ["./src/component/*"],
       "@lib/*": ["./src/lib/*"],
-      "@hooks/*": ["./src/hooks/*"]
+      "@hooks/*": ["./src/hooks/*"],
+      "@context/*": ["./src/context/*"]
     },
     "incremental": true
   },
