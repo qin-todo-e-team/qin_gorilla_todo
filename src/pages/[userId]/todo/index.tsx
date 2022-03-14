@@ -1,5 +1,6 @@
 import { PostPanel } from "@component/Panel/PostPanel";
 import { TodoList } from "@component/TodoList";
+import { TodoProvider } from "@context/TodoContext";
 import { db } from "config/firebase";
 import type { DocumentData, FirestoreError } from "firebase/firestore";
 import { collection } from "firebase/firestore";
@@ -36,10 +37,12 @@ export const Index = () => {
 
   return (
     <>
-      <main className="mx-auto mb-8 w-full min-w-[300px] max-w-[600px]">
-        <TodoList todoList={data} />
-      </main>
-      <PostPanel />
+      <TodoProvider>
+        <main className="mx-auto mb-8 w-full min-w-[300px] max-w-[600px]">
+          <TodoList todoList={data} />
+        </main>
+        <PostPanel />
+      </TodoProvider>
       <Toaster />
     </>
   );

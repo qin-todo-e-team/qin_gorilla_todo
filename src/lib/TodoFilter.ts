@@ -1,8 +1,7 @@
 import type { DocumentData } from "firebase/firestore";
-import type { TodoListType } from "src/models/Todo";
 
 export const TodoFilter = (
-  todoList: TodoListType[] | DocumentData[] | undefined,
+  todoList: DocumentData[] | undefined,
   title: "today" | "upcoming" | "tomorrow"
 ) => {
   if (!todoList) {

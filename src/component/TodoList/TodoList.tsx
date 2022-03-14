@@ -1,10 +1,9 @@
 import type { DocumentData } from "firebase/firestore";
 import { CheckBox } from "src/component/CheckBox/CheckBox";
 import { TodoFilter } from "src/lib/TodoFilter";
-import type { TodoListType } from "src/models/Todo";
 
 type Props = {
-  todoList: TodoListType[] | DocumentData[] | undefined;
+  todoList: DocumentData[] | undefined;
 };
 
 export const TodoList = ({ todoList }: Props) => (
