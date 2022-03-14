@@ -29,6 +29,9 @@
   },
   "dependencies": {
     "@chakra-ui/react": "^1.8.3",
+    "@dnd-kit/core": "^5.0.2",
+    "@dnd-kit/sortable": "^6.0.1",
+    "@dnd-kit/utilities": "^3.1.0",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
     "classcat": "^5.0.3",

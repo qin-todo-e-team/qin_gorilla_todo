@@ -1,30 +1,37 @@
 import { PostPanel } from "@component/Panel/PostPanel";
 import { TodoList } from "@component/TodoList";
 import { db } from "config/firebase";
-import type { DocumentData, FirestoreError } from "firebase/firestore";
+import type { FirestoreError } from "firebase/firestore";
+import { DocumentData, orderBy, query } from "firebase/firestore";
 import { collection } from "firebase/firestore";
 import { useRouter } from "next/router";
 import React from "react";
 import { useCollection } from "react-firebase-hooks/firestore";
+import type { TodoListType } from "src/models/Todo";
 import { todoCollection } from "src/repository/todo/todoCollection";
 
 export const FirestoreCollection = (): {
   // TODO: 不要なら削除
   // value: QuerySnapshot<DocumentData> | undefined;
-  data: DocumentData[] | undefined;
+  data: TodoListType[] | undefined;
   loading: boolean;
   error: FirestoreError | undefined;
 } => {
   const { userId } = useRouter().query;
   const [value, loading, error] = useCollection(
-    collection(db, todoCollection(userId as string)),
-    {
-      snapshotListenOptions: { includeMetadataChanges: true },
-    }
+    query(
+      collection(db, todoCollection(userId as string)),
+      orderBy("expire", "asc")
+    )
   );
+  //snapshotListenOptions: { includeMetadataChanges: true },
 
   const data = value?.docs.map((d) => {
-    return { todoId: d.id, todoData: d.data() };
+    const { name, expire, isFinished, isDeleted } = d.data();
+    return {
+      todoId: d.id,
+      todoData: { name, expire: expire.toDate(), isFinished, isDeleted },
+    };
   });
 
   return { data, loading, error };

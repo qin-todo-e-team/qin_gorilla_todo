@@ -2,7 +2,7 @@ import type { DocumentData } from "firebase/firestore";
 import type { TodoListType } from "src/models/Todo";
 
 export const TodoFilter = (
-  todoList: TodoListType[] | DocumentData[] | undefined,
+  todoList: TodoListType[] | undefined,
   title: "today" | "upcoming" | "tomorrow"
 ) => {
   if (!todoList) {
@@ -10,7 +10,7 @@ export const TodoFilter = (
   }
 
   return todoList.filter((todo) => {
-    const date = todo.todoData?.expire.toDate();
+    const date = todo.todoData?.expire;
     if (!date) {
       return false;
     }
