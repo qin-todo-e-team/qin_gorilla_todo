@@ -1,6 +1,6 @@
 import type { DocumentData } from "firebase/firestore";
 import type { Dispatch } from "react";
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 
 type TodoContextProps = {
   currentTodo: DocumentData | undefined;
