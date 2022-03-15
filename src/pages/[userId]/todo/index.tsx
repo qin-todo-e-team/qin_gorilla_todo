@@ -24,7 +24,6 @@ export const FirestoreCollection = (): {
       orderBy("expire", "asc")
     )
   );
-  //snapshotListenOptions: { includeMetadataChanges: true },
 
   const data = value?.docs.map((d) => {
     const { name, expire, isFinished, isDeleted } = d.data();

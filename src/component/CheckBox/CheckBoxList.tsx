@@ -2,8 +2,12 @@ import { RadioButton } from "@component/RadioButton";
 import {
   closestCenter,
   DndContext,
+  KeyboardSensor,
+  MouseSensor,
   PointerSensor,
+  TouchSensor,
   useSensor,
+  useSensors,
 } from "@dnd-kit/core";
 import {
   arrayMove,
@@ -58,16 +62,23 @@ const ThemeLists: ThemeListType = {
   },
 };
 
-const test = "OK";
-
 export const CheckBoxList = ({ todoList, title }: Props) => {
-  // console.log("todoList", todoList);
   const [items, setItems] = useState<TodoListType[]>([...todoList]);
-  // console.log("items", items);
   const { onUpdate } = useTodo();
   const { label, color, bg } = ThemeLists[title ?? "today"];
-  const sensors = [useSensor(PointerSensor)];
-  //console.log(todoList);
+
+  const mouseSensor = useSensor(MouseSensor, {
+    activationConstraint: {
+      distance: 5, // 5px ドラッグした時にソート機能を有効にする
+    },
+  });
+  const touchSensor = useSensor(TouchSensor, {
+    activationConstraint: {
+      distance: 5, // 5px ドラッグした時にソート機能を有効にする
+    },
+  });
+  const keyboardSensor = useSensor(KeyboardSensor);
+  const sensors = useSensors(mouseSensor, keyboardSensor, touchSensor);
 
   useEffect(() => {
     setItems(todoList);
@@ -76,9 +87,6 @@ export const CheckBoxList = ({ todoList, title }: Props) => {
   const handleDragEnd = ({ active, over }) => {
     if (active.id !== over.id) {
       setItems((todos) => {
-        // console.log(todos);
-        // console.log("active", active);
-        // console.log("over", over);
         const oldIndex = todos.findIndex(
           (todo, index) => todo.todoId === active.id
         );
