@@ -45,11 +45,11 @@ export const logout = (): Promise<void> =>
       .catch((error) => reject(error));
   });
 
-export const deleteCurrentUser = (): void => {
+export const deleteCurrentUser = async (): Promise<void> => {
   const auth = getAuth(app);
   const user = auth.currentUser;
   if (user) {
-    deleteUser(user);
+    await deleteUser(user);
   }
 };
 

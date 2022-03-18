@@ -46,8 +46,8 @@ export const Account: React.VFC = () => {
     router.push("/login");
   };
 
-  const deleteUser = () => {
-    deleteCurrentUser();
+  const deleteUser = async () => {
+    await deleteCurrentUser();
     setSelectedItem("");
     router.push("/login");
   };
