@@ -19,7 +19,7 @@ autolabeler:
       - "/^feat(ure)?[/-].+/"
     title:
       - "/^feat(ure)?[/-].+/"
-  - label: bug
+  - label: fix
     branch:
       - "/^fix[/-].+/"
     title:
@@ -34,7 +34,7 @@ autolabeler:
       - "/(refactor|refactoring)[/-].+/"
     title:
       - "/(refactor|refactoring)[/-].+/"
-  - label: documentation
+  - label: docs
     branch:
       - "/doc(umentation)[/-].+/"
     title:
