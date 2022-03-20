@@ -16,8 +16,12 @@ export const SelectRow: React.VFC<Props> = ({ children, type }) => {
 
   const clickHandler = async () => {
     setThemeColor(type);
-    await onCreate(type);
-    successToast("テーマを変更しました");
+    try {
+      await onCreate(type);
+      successToast("テーマを変更しました");
+    } catch {
+      successToast("テーマを変更に失敗しました");
+    }
   };
 
   return (
