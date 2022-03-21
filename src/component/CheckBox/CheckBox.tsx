@@ -1,4 +1,5 @@
 import { RadioButton } from "@component/RadioButton";
+import type { TODO_CATEGORY } from "@constant/TodoCategory";
 import { useTodoContext } from "@context/TodoContext";
 import { useTodo } from "@repo/todo/useTodo";
 import cc from "classcat";
@@ -8,7 +9,7 @@ import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
 import { HiOutlineDuplicate } from "react-icons/hi";
 
 type Props = {
-  title: "today" | "upcoming" | "tomorrow" | undefined;
+  title: typeof TODO_CATEGORY[keyof typeof TODO_CATEGORY];
   todoList: DocumentData[] | undefined;
   children?: React.ReactNode;
 };

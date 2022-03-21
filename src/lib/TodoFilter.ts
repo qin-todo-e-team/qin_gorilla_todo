@@ -1,8 +1,9 @@
+import { TODO_CATEGORY } from "@constant/TodoCategory";
 import type { DocumentData } from "firebase/firestore";
 
 export const TodoFilter = (
   todoList: DocumentData[] | undefined,
-  title: "today" | "upcoming" | "tomorrow"
+  title: typeof TODO_CATEGORY[keyof typeof TODO_CATEGORY]
 ) => {
   if (!todoList) {
     return [];
@@ -14,11 +15,11 @@ export const TodoFilter = (
       return false;
     }
     switch (title) {
-      case "today":
+      case TODO_CATEGORY.TODAY:
         return date.getDate() <= new Date().getDate();
-      case "tomorrow":
+      case TODO_CATEGORY.TOMORROW:
         return date.getDate() === new Date().getDate() + 1;
-      case "upcoming":
+      case TODO_CATEGORY.UPCOMING:
         return date.getDate() >= new Date().getDate() + 2;
       default:
         return false;
