@@ -17,22 +17,32 @@ autolabeler:
   - label: feature
     branch:
       - "/^feat(ure)?[/-].+/"
-  - label: bug
+    title:
+      - "/^feat(ure)?[/-].+/"
+  - label: fix
     branch:
+      - "/^fix[/-].+/"
+    title:
       - "/^fix[/-].+/"
   - label: chore
     branch:
       - "/^chore[/-].+/"
+    title:
+      - "/^chore[/-].+/"
   - label: refactor
     branch:
       - "/(refactor|refactoring)[/-].+/"
-  - label: documentation
+    title:
+      - "/(refactor|refactoring)[/-].+/"
+  - label: docs
     branch:
       - "/doc(umentation)[/-].+/"
-    files:
-      - "*.md"
+    title:
+      - "/doc(umentation)[/-].+/"
   - label: enhancement
     branch:
+      - "/(enhancement|improve)[/-].+/"
+    title:
       - "/(enhancement|improve)[/-].+/"
 change-title-escapes: '\<*_&'
 exclude-labels:
