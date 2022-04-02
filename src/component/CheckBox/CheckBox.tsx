@@ -1,3 +1,4 @@
+import { DeleteModal } from "@component/Delete/DeleteModal";
 import { RadioButton } from "@component/RadioButton";
 import { useTodoContext } from "@context/TodoContext";
 import { useTodo } from "@repo/todo/useTodo";
@@ -51,6 +52,7 @@ export const CheckBox = ({ todoList, title }: Props) => {
   return (
     <div className="mb-[70px] w-full">
       <h1 className={cc(["p-2 text-xl font-bold", color])}>{label}</h1>
+
       <div>
         <div className="flex flex-col">
           {todoList?.map((todo, index) => (
@@ -102,14 +104,22 @@ export const CheckBox = ({ todoList, title }: Props) => {
                   >
                     <AiOutlineEdit className="text-xl " />
                   </button>
-                  <button
+                  {/* <button
                     type="button"
-                    onClick={() => onDelete(todo.todoId)}
+                    //modalをだしたい
+                    //onClick={() => onDelete(todo.todoId)}
+                    onClick={() => alert("削除したい！！！！")}
+                    title="delete"
+                    className="flex justify-center items-center"
+                  > */}
+
+                  <DeleteModal
+                    onDelete={() => onDelete(todo.todoId)}
                     title="delete"
                     className="flex justify-center items-center"
                   >
                     <AiOutlineDelete className="text-xl " />
-                  </button>
+                  </DeleteModal>
                 </div>
               </div>
             </div>
