@@ -104,15 +104,6 @@ export const CheckBox = ({ todoList, title }: Props) => {
                   >
                     <AiOutlineEdit className="text-xl " />
                   </button>
-                  {/* <button
-                    type="button"
-                    //modalをだしたい
-                    //onClick={() => onDelete(todo.todoId)}
-                    onClick={() => alert("削除したい！！！！")}
-                    title="delete"
-                    className="flex justify-center items-center"
-                  > */}
-
                   <DeleteModal
                     onDelete={() => onDelete(todo.todoId)}
                     title="delete"
