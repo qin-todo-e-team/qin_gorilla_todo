@@ -1,15 +1,13 @@
 import { useColorModeValue } from "@chakra-ui/react";
+import { PostButton, PostTextBox, UpdatePanel } from "@component/Panel";
 import { useTodoContext } from "@context/TodoContext";
 import { useTodo } from "@repo/todo/useTodo";
 import cc from "classcat";
 import React, { useEffect, useState } from "react";
 
-import { PostButton } from "./PostButton";
-import { PostTextBox } from "./PostTextBox";
-
 export const PostPanel: React.VFC = () => {
   const [input, setInput] = useState<string>("");
-  const { onCreate } = useTodo();
+  const { onCreate, onUpdate } = useTodo();
   const bg = useColorModeValue("bg-white", "bg-[#1A202C]");
   const { currentTodo } = useTodoContext();
 
@@ -34,6 +32,9 @@ export const PostPanel: React.VFC = () => {
       <div className="group w-full">
         <div className="group flex justify-center mb-2 space-x-2 w-full">
           <PostTextBox value={input ?? ""} onChange={handleChange} />
+        </div>
+        <div>
+          <UpdatePanel />
         </div>
         <div
           className={cc([
