@@ -10,18 +10,13 @@ type Props = {
 export const TypographyLayout: React.VFC<Props> = ({ children, title }) => {
   const { colorMode } = useColorMode();
   return (
-    <>
+    <div>
+      <SettingTitle title={title} />
       {colorMode === "light" ? (
-        <div>
-          <SettingTitle title={title} />
-          <div className={"mx-auto prose"}>{children}</div>
-        </div>
+        <div className={"mx-auto prose"}>{children}</div>
       ) : (
-        <div>
-          <SettingTitle title={title} />
-          <div className={"mx-auto prose prose-invert"}>{children}</div>
-        </div>
+        <div className={"mx-auto prose prose-invert"}>{children}</div>
       )}
-    </>
+    </div>
   );
 };
